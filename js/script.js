@@ -283,7 +283,7 @@ document.getElementById("bookingForm").onsubmit = function(e) {
     var message = `Hello! I want to book a lab test.\nName: ${name}\nPhone: ${phone}\nAddress: ${address}`;
     var encodedMessage = encodeURIComponent(message);
 
-    var numbers = ["919876543210", "919812345678", "919800000000"];
+    var numbers = ["919867915433", "919326220296", "919372026433"];
     var hour = new Date().getHours();
     var agentNumber;
 
