@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>CBC Lab - Test Details | Mumbai</title>
+	<meta name="viewport" container="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">CBC Lab</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="tests.html">Tests</a>
+            <a href="reports.html">Reports</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container">
+	<h1>Blood Test</h2>
+	<p>Includes RBC, WBC, Hemoglobin analysis.</p>
+	<h3>Price: ₹XXX</h3>
+	<button id="whatsappBtn">Book Now</button>
+    </div>
+
+    <div class="container">
+	<h1>Diabetes Test</h2>
+	<p>Check sugar levels quickly.</p>
+	<h3>Price: ₹XXX</h3>
+	<button id="whatsappBtn">Book Now</button>
+    </div>
+
+    <!-- ===== WHATSAPP MODAL ===== -->
+    <div id="whatsappModal" class="modal">
+	<div class="modal-content">
+		<span class="close">&times;</span>
+
+		<h2>Book Your Test</h2>
+
+		<form id="bookingForm">
+			<input type="text" id="name" placeholder="Your Name" required><br><br>
+
+			<input type="text" id="phone" placeholder="Phone Number" required>
+			<span id="phoneError" style="color:red; display:none;">Invalid number</span><br><br>
+
+			<textarea id="address" placeholder="Your Address" required></textarea><br><br>
+
+			<button type="submit">Send to WhatsApp</button>
+		</form>
+	</div>
+    </div>
+
+    <!-- ===== LINK YOUR JS FILE ===== -->
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

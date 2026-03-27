@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CBC Lab - Precision Diagnostics at Your Doorstep | Mumbai</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+		<img src="images/logo/CBCLogo_13.jpeg" alt="CBC Lab">
+	</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="tests.html">Tests</a>
+            <a href="reports.html">Reports</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Book Lab Tests From Home</h1>
+            <p>Fast • Safe • Home Sample Collection</p>
+            <!--button onclick="location.href='tests.html'">Browse Tests</button>
+	    <!-- Search -->
+            <div class="search-box">
+               <div class="search-container">
+                  <input type="text" id="search" placeholder="Detecting location...">
+                  <button class="search-btn" onclick="searchTest()">🔍</button>		  
+    		  <button class="search-btn" id="tab-cat" onclick="switchTab('cat')">📂</button>
+               </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Location -->
+    <!--div class="location" id="location">Detecting location...</div>
+    
+    <!-- Popular Tests -->
+    <div class="container">
+        <h2>Popular Tests</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="images/test/blood-test.jpg" alt="Blood Test">
+                <div class="card-content">
+                    <h3>Blood Test</h3>
+                    <p>Complete blood health check.</p>
+                    <button onclick="location.href='test-details.html'">View Details</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="images/test/diabetes-test.jpg" alt="Diabetes Test">
+                <div class="card-content">
+                    <h3>Diabetes Test</h3>
+                    <p>Check sugar levels quickly.</p>
+                    <button onclick="location.href='test-details.html'">View Details</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="images/test/thyroid-test.jpg" alt="Thyroid Test">
+                <div class="card-content">
+                    <h3>Thyroid Test</h3>
+                    <p>Analyze thyroid hormone levels.</p>
+                    <button onclick="location.href='test-details.html'">View Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Horizontal Categories -->
+    <div class="horizontal-categories" id="horizontalCategories"></div>
+
+    <!-- Package Cards -->
+    <div class="package-container" id="packageContainer"></div>
+
+    <!-- Booking Form -->
+    <div class="form-popup" id="form">
+        <h3 id="form-title">Book Test</h3>
+        <input type="text" placeholder="Your Name" id="userName">
+        <input type="text" placeholder="Phone Number" id="userPhone">
+        <input type="date" id="testDate">
+        <button onclick="submitBooking()">Submit</button>
+        <button onclick="closeForm()" style="margin-left:10px;">Cancel</button>
+    </div>
+
+    <!-- How It Works -->
+    <div class="container">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <h3>1. Select Test</h3>
+                <p>Choose test from website.</p>
+            </div>
+            <div class="step">
+                <h3>2. Book Appointment</h3>
+                <p>Fill booking form online.</p>
+            </div>
+            <div class="step">
+                <h3>3. Sample Collection</h3>
+                <p>Technician visits your home.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 CBC Lab</p>
+    </footer>
+
+    <!-- Floating Contact Buttons -->
+    <div class="contact-buttons">
+        <a href="#" id="callNowBtn">📞 Call Now</a>
+        <a href="#" id="whatsappBtn">💬 Book Appointment</a>
+   </div>
+
+   <!-- Modal Booking Form -->
+   <div id="whatsappModal" class="modal">
+     <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Book Lab Appointment</h2>
+        <form id="bookingForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required placeholder="Your Name">
+
+            <label for="phone">Phone:</label>
+	    <input type="tel" id="phone" required placeholder="Your Phone">
+            <span id="phoneError" style="color: red; font-size: 13px; display: none;">Please enter a valid 10-digit Indian mobile number starting with 6-9.</span>
+
+            <label for="address">Address:</label>
+            <textarea id="address" required placeholder="Your Address"></textarea>
+
+            <button type="submit">Send via WhatsApp</button>
+        </form>
+     </div>
+   </div>
+
+    <!-- JS -->
+    <script src="js/script.js" defer></script>
+</body>
+</html>
