@@ -1,0 +1,425 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(120deg, #eef2f7, #ffffff);
+    color: #333;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: red;
+    display: flex;
+    align-items: center;
+}
+
+/* Add this for image */
+.logo img {
+    height: 40px;
+    width: auto;
+}
+
+nav a {
+    margin: 0 12px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #3498db;
+}
+
+/* HERO */
+.hero {
+    height: 420px;
+    background-size: cover;
+    background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('../images/background/background.jpg') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 46px;
+    margin-bottom: 15px;
+    animation: fadeDown 1s;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    animation: fadeUp 1.2s;
+}
+
+.location { text-align: center; font-size: 14px; color: gray; }
+
+.search-box { display: flex; justify-content: center; padding: 10px; }
+.search-container { display: flex; background: white; border-radius: 40px; width: 90%; max-width: 600px; padding: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.search-container input { flex: 1; border: none; outline: none; padding: 10px; }
+.search-btn { background: #25D366; color: white; border: none; border-radius: 50%; padding: 12px; cursor: pointer; }
+
+/* Horizontal categories with wrapping */
+.horizontal-categories {
+    display: flex;
+    flex-wrap: wrap; /* wrap to next line if not enough space */
+    padding: 10px 15px;
+    gap: 12px;
+    justify-content: center; /* center categories */
+}
+.category-card {
+    flex: 0 1 180px; /* responsive width */
+    min-width: 140px;
+    max-width: 200px;
+    background: white;
+    border-radius: 12px;
+    padding: 10px 15px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+.category-card:hover { transform: translateY(-5px); box-shadow: 0 6px 15px rgba(0,0,0,0.15); }
+.category-card.active { background-color: #f0f4ff; }
+.category-card i { transition: transform 0.3s ease; }
+.category-card.active i { transform: rotate(180deg); }
+
+/* Package cards */
+.package-container {
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 15px;
+}
+.package-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+.package-card:hover { transform: translateY(-7px); box-shadow: 0 6px 20px rgba(0,0,0,0.2);}
+.package-card img { width: 50px; height: 50px; object-fit: contain; margin-bottom: 10px; }
+.package-card h4 { margin: 5px 0; font-size: 16px; }
+.package-card p { margin: 3px 0; font-size: 13px; color: #4b5563; }
+
+/* Booking Form */
+.form-popup { display: none; position: fixed; bottom: 0; background: white; width: 100%; padding: 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.2); z-index: 100; }
+.form-popup input { width: 100%; padding: 10px; margin: 5px 0; box-sizing: border-box; font-size: 16px; }
+
+@media(max-width:600px){
+    .package-card { padding: 12px; }
+}
+
+/* BUTTON */
+button {
+    background: #25D366;
+    border: none;
+    padding: 12px 22px;
+    color: white;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background: #1ebe57;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 60px 20px;
+}
+
+.container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* GRID */
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+/* CARDS */
+.card {
+    width: 260px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: transform 0.35s, box-shadow 0.35s;
+    animation: fadeUp 0.8s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 35px rgba(0,0,0,0.18);
+}
+
+.card img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 18px;
+}
+
+.card-content h3 {
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* HOW IT WORKS */
+.steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.step {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 220px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.step:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+/* FOOTER */
+footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+}
+
+/* FLOATING BUTTONS WITH ICONS AND ANIMATION */
+.contact-buttons {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 999;
+}
+
+.contact-buttons a {
+    padding: 15px 22px;
+    font-weight: bold;
+    border-radius: 50px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-size: 18px;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-buttons a::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.1);
+    top: 0;
+    left: -100%;
+    transition: all 0.5s;
+}
+.contact-buttons a:hover::before {
+    left: 0;
+}
+
+#callNowBtn {
+    background: #0d6efd;
+    color: white;
+}
+#whatsappBtn {
+    background: #25d366;
+    color: white;
+}
+
+/* Bounce animation on load */
+@keyframes bounceIn {
+    0% { transform: translateY(100px); opacity: 0; }
+    60% { transform: translateY(-10px); opacity: 1; }
+    80% { transform: translateY(5px); }
+    100% { transform: translateY(0); }
+}
+
+#callNowBtn, #whatsappBtn {
+    animation: bounceIn 1s ease forwards;
+}
+
+/* Add icons using pseudo-elements */
+#callNowBtn::before {
+    content: "📞";
+    margin-right: 8px;
+}
+#whatsappBtn::before {
+    content: "💬";
+    margin-right: 8px;
+}
+
+/* ===== Modal Styles ===== */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+    background: white;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    animation: fadeUp 0.5s;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+}
+
+.modal-content label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.modal-content input,
+.modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.modal-content button {
+    width: 100%;
+    padding: 12px;
+    background: #25d366;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.modal-content button:hover {
+    background: #1ebe57;
+}
+
+.close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+    from {opacity: 0; transform: translateY(30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes fadeDown {
+    from {opacity: 0; transform: translateY(-30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* MOBILE RESPONSIVE */
+@media(max-width: 768px){
+    header{
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero h1{
+        font-size: 30px;
+    }
+
+    .grid{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card{
+        width: 90%;
+    }
+
+    .steps{
+        flex-direction: column;
+        align-items: center;
+    }
+}
