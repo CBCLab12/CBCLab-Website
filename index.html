@@ -39,11 +39,101 @@
         </div>
     </section>
     
+    <!-- Browse by Category -->
+    <div id="categorySection" class="category-section" style="display:none;">
+       <div class="category-grid">
+
+          <div class="category-card" onclick="showSubCategory('Blood & CBC')">
+             <div class="icon">🩸</div>
+             <h3>Blood & CBC</h3>
+             <p>26 tests</p>
+          </div>
+
+          <div class="category-card" onclick="showSubCategory('Liver')">
+             <div class="icon">❤️</div>
+             <h3>Liver</h3>
+             <p>83 tests</p>
+          </div>
+
+          <div class="category-card" onclick="showSubCategory('Kidney')">
+             <div class="icon">🫘</div>
+             <h3>Kidney</h3>
+             <p>38 tests</p>
+          </div>
+
+          <div class="category-card" onclick="showSubCategory('Thyroid')">
+             <div class="icon">🦋</div>
+             <h3>Thyroid</h3>
+             <p>25 tests</p>
+          </div>
+
+          <div class="category-card" onclick="showSubCategory('Diabetes')">
+             <div class="icon">💉</div>
+             <h3>Diabetes</h3>
+             <p>30 tests</p>
+          </div>
+
+          <div class="category-card" onclick="showSubCategory('Lipid & Heart')">
+             <div class="icon">💓</div>
+             <h3>Lipid & Heart</h3>
+             <p>22 tests</p>
+          </div>
+
+          <div class="category-card" onclick="showSubCategory('Vitamins')">
+             <div class="icon">✨</div>
+             <h3>Vitamins</h3>
+             <p>38 tests</p>
+          </div>
+
+          <div class="category-card" onclick="showSubCategory('Hormones')">
+             <div class="icon">⚡</div>
+             <h3>Hormones</h3>
+             <p>47 tests</p>
+          </div>
+
+          <div class="category-card" onclick="showSubCategory('Infections')">
+             <div class="icon">🛡️</div>
+             <h3>Infections</h3>
+             <p>160 tests</p>
+          </div>
+
+          <div class="category-card" onclick="showSubCategory('Cancer Markers')">
+             <div class="icon">🔬</div>
+             <h3>Cancer Markers</h3>
+             <p>35 tests</p>
+          </div>
+
+          <div class="category-card" onclick="showSubCategory('Urine & Stool')">
+             <div class="icon">🧪</div>
+             <h3>Urine & Stool</h3>
+             <p>233 tests</p>
+          </div>
+
+          <div class="category-card" onclick="showSubCategory('Allergy')">
+             <div class="icon">🌿</div>
+             <h3>Allergy</h3>
+             <p>207 tests</p>
+          </div>
+
+          <div class="category-card" onclick="showSubCategory('Wellness Packages')">
+             <div class="icon">💊</div>
+             <h3>Wellness Packages</h3>
+             <p>259 tests</p>
+          </div>
+
+       </div>
+    </div>
+    
+    <div id="subCategorySection" class="subcategory-section" style="display:none;">
+       <h2 id="subCategoryTitle"></h2>
+       <div id="subCategoryContainer" class="subcategory-grid"></div>
+    </div>
+    
     <!-- Location -->
     <!--div class="location" id="location">Detecting location...</div>
     
     <!-- Popular Tests -->
-    <div class="container">
+    <!--div class="container">
         <h2>Popular Tests</h2>
         <div class="grid">
             <div class="card">
