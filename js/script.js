@@ -1,4 +1,4 @@
-const tests = [
+/*const tests = [
     {name:"Fever Package - Advance", category:"Fever", includes:"Dengue, Malaria, Typhoid", report:"24–48 hrs", icon:"images/fever.png"},
     {name:"Diabetes Basic", category:"Diabetes", includes:"Fasting, Post Prandial", report:"12 hrs", icon:"images/diabetes.png"},
     {name:"Vitamin D & B12", category:"Vitamins", includes:"Vitamin D, B12", report:"24 hrs", icon:"images/vitamins.png"},
@@ -38,7 +38,30 @@ function renderCategories(){
     });
 }
 
-renderCategories();
+renderCategories();*/
+
+function switchTab(tab) {
+    const categorySection = document.getElementById("categorySection");
+    const subSection = document.getElementById("subCategorySection");
+
+    if (tab === 'cat') {
+        const isVisible = categorySection.style.display === "block";
+
+        if (isVisible) {
+            // 👉 Hide everything
+            categorySection.style.display = "none";
+            subSection.style.display = "none";
+            activeCategory = null;
+        } else {
+            categorySection.style.display = "block";
+
+            window.scrollTo({
+                top: categorySection.offsetTop - 80,
+                behavior: "smooth"
+            });
+        }
+    }
+}
 
 function showPackages(cat){
     const container=document.getElementById("packageContainer");
@@ -52,6 +75,137 @@ function showPackages(cat){
             <button onclick="openForm('${t.name}')">Book Now</button>
         </div>
     `).join("");
+}
+
+// ====================
+// Subcategories per category (1mg-style, embedded in JS)
+// ====================
+let activeCategory = null;
+
+// Define subcategory data directly with emojis
+const subCategoryData = {
+    "Blood & CBC": [
+        { name: "CBC Basic", includes: "Hemoglobin, WBC, Platelets", report: "12 hrs", price: "350", popular: true, icon: "🩸" },
+        { name: "CBC Advanced", includes: "CBC + ESR + Peripheral Smear", report: "24 hrs", price: "550", popular: false, icon: "🩸" }
+    ],
+    "Liver": [
+        { name: "Liver Function Test", includes: "SGPT, SGOT, Bilirubin", report: "24 hrs", price: "400", popular: true, icon: "❤️" },
+        { name: "Advanced Liver Panel", includes: "LFT + ALP + GGT", report: "24–48 hrs", price: "700", popular: false, icon: "❤️" }
+    ],
+    "Kidney": [
+        { name: "Kidney Function Test", includes: "Creatinine, Urea, Electrolytes", report: "24 hrs", price: "450", popular: true, icon: "🫘" }
+    ],
+    "Thyroid": [
+        { name: "Thyroid Panel", includes: "TSH, T3, T4", report: "12–24 hrs", price: "500", popular: true, icon: "🦋" }
+    ],
+    "Diabetes": [
+        { name: "Diabetes Check", includes: "Fasting, Post Prandial", report: "12 hrs", price: "400", popular: true, icon: "💉" },
+        { name: "HbA1c Test", includes: "HbA1c", report: "24 hrs", price: "600", popular: false, icon: "💉" }
+    ],
+    "Lipid & Heart": [
+        { name: "Lipid Profile", includes: "Cholesterol, LDL, HDL, Triglycerides", report: "24 hrs", price: "500", popular: true, icon: "💓" }
+    ],
+    "Vitamins": [
+        { name: "Vitamin D & B12", includes: "Vitamin D, B12", report: "24 hrs", price: "600", popular: true, icon: "✨" }
+    ],
+    "Hormones": [
+        { name: "Hormone Panel", includes: "Estrogen, Progesterone, Testosterone", report: "24–48 hrs", price: "1200", popular: true, icon: "⚡" }
+    ],
+    "Infections": [
+        { name: "COVID-19 RT-PCR", includes: "SARS-CoV-2 Detection", report: "24 hrs", price: "800", popular: true, icon: "🛡️" },
+        { name: "Dengue Test", includes: "NS1 + IgM/IgG", report: "24 hrs", price: "500", popular: false, icon: "🛡️" }
+    ],
+    "Cancer Markers": [
+        { name: "PSA Test", includes: "Prostate Specific Antigen", report: "24 hrs", price: "600", popular: true, icon: "🔬" }
+    ],
+    "Urine & Stool": [
+        { name: "Urine Routine", includes: "Physical, Chemical, Microscopy", report: "12 hrs", price: "300", popular: true, icon: "🧪" }
+    ],
+    "Allergy": [
+        { name: "Allergy Panel", includes: "IgE, Specific Allergen Tests", report: "48 hrs", price: "1000", popular: false, icon: "🌿" }
+    ],
+    "Wellness Packages": [
+        { name: "Basic Wellness Package", includes: "CBC, Sugar, Lipid", report: "24 hrs", price: "1200", popular: true, icon: "💊" }
+    ]
+};
+
+// Render subcategory for a selected category
+function showSubCategory(category) {
+    const container = document.getElementById("subCategoryContainer");
+    const section = document.getElementById("subCategorySection");
+    const title = document.getElementById("subCategoryTitle");
+
+    // Toggle hide if same category clicked
+    if (activeCategory === category) {
+        section.style.display = "none";
+        activeCategory = null;
+        return;
+    }
+
+    activeCategory = category;
+    container.innerHTML = "";
+    title.innerText = category + " Tests";
+
+    const data = subCategoryData[category];
+
+    if (!data || data.length === 0) {
+        container.innerHTML = "<p>No tests available</p>";
+        section.style.display = "block";
+        return;
+    }
+
+    // Render premium 1mg-style cards with emoji icons
+    data.forEach(test => {
+        const card = document.createElement("div");
+        card.className = "sub-card";
+
+        card.innerHTML = `
+            <div class="sub-top">
+                <span class="sub-icon">${test.icon}</span>
+                <h3>${test.name}</h3>
+                ${test.popular ? '<span class="badge">Popular</span>' : ''}
+            </div>
+            <p class="includes">🧪 ${test.includes}</p>
+            <div class="sub-meta">
+                <span>⏱ ${test.report}</span>
+                <span class="price">
+                    <del>₹${parseInt(test.price) + 300}</del>
+                    <b>₹${test.price}</b>
+                </span>
+            </div>
+            <button class="book-btn" onclick="openForm('${test.name}')">Book Now</button>
+        `;
+        container.appendChild(card);
+    });
+
+    section.style.display = "block";
+
+    window.scrollTo({
+        top: section.offsetTop - 80,
+        behavior: "smooth"
+    });
+}
+
+// ===== Switch Tabs (Categories) =====
+function switchTab(tab) {
+    const categorySection = document.getElementById("categorySection");
+    const subSection = document.getElementById("subCategorySection");
+
+    if (tab === 'cat') {
+        const isVisible = categorySection.style.display === "block";
+
+        if (isVisible) {
+            categorySection.style.display = "none";
+            subSection.style.display = "none";
+            activeCategory = null;
+        } else {
+            categorySection.style.display = "block";
+            window.scrollTo({
+                top: categorySection.offsetTop - 80,
+                behavior: "smooth"
+            });
+        }
+    }
 }
 
 /*function searchTest(){
@@ -283,7 +437,7 @@ document.getElementById("bookingForm").onsubmit = function(e) {
     var message = `Hello! I want to book a lab test.\nName: ${name}\nPhone: ${phone}\nAddress: ${address}`;
     var encodedMessage = encodeURIComponent(message);
 
-    var numbers = ["919867915433", "919326220296", "919372026433"];
+    var numbers = ["919876543210", "919812345678", "919800000000"];
     var hour = new Date().getHours();
     var agentNumber;
 
