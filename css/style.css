@@ -22,6 +22,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
+    height: 70px; /* fix header height */
 }
 
 .logo {
@@ -34,8 +35,9 @@ header {
 
 /* Add this for image */
 .logo img {
-    height: 40px;
-    width: auto;
+    height: 70px; /* new desired height */
+    width: auto;  /* maintain aspect ratio */
+    display: block; /* avoid extra spacing */
 }
 
 nav a {
@@ -199,6 +201,10 @@ nav a:hover {
     cursor: pointer;
 }
 
+#subCategorySection:empty {
+    display: none;
+}
+
 /* Badge */
 .badge {
     background: linear-gradient(45deg, #ff6b6b, #ff9f43);
@@ -236,7 +242,7 @@ nav a:hover {
 
 /* Package cards */
 .package-container {
-    padding: 15px;
+    padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
     gap: 15px;
@@ -248,11 +254,41 @@ nav a:hover {
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
+    margin: 10px;
 }
 .package-card:hover { transform: translateY(-7px); box-shadow: 0 6px 20px rgba(0,0,0,0.2);}
 .package-card img { width: 50px; height: 50px; object-fit: contain; margin-bottom: 10px; }
 .package-card h4 { margin: 5px 0; font-size: 16px; }
 .package-card p { margin: 3px 0; font-size: 13px; color: #4b5563; }
+
+#packageContainer {
+    display: none;                  /* hidden by default */
+    padding: 25px;                  /* same as subcategory section */
+    background: #ffffff;            /* same as subcategory */
+    box-sizing: border-box;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+#packageContainer {
+    display: none;
+}
+
+#packageContainer.show {
+    display: grid;
+    padding: 25px;
+    background: #ffffff;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+#packageContainer.active {
+    display: grid;
+}
+
+#packageContainer.active:empty {
+    display: none;
+}
 
 /* Booking Form */
 .form-popup { display: none; position: fixed; bottom: 0; background: white; width: 100%; padding: 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.2); z-index: 100; }
