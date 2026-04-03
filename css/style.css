@@ -11,41 +11,76 @@ body {
     color: #333;
 }
 
-/* HEADER */
+/* Header base */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 40px;
+    padding: 10px 20px;
     background: white;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     position: sticky;
     top: 0;
     z-index: 100;
-    height: 70px; /* fix header height */
 }
 
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: red;
-    display: flex;
-    align-items: center;
-}
-
-/* Add this for image */
+/* Logo */
 .logo img {
-    max-height: 50px; /* reduce height on small screens */
+    height: 60px;
     width: auto;
-    display: block;
+}
+
+/* Nav */
+nav {
+    display: flex;
+    gap: 15px;
 }
 
 nav a {
-    margin: 0 12px;
     text-decoration: none;
     color: #333;
     font-weight: 500;
     transition: 0.3s;
+}
+
+nav a:hover {
+    color: #3498db;
+}
+
+/* Hamburger hidden by default */
+.hamburger {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    /* Show hamburger */
+    .hamburger {
+        display: block;
+    }
+
+    /* Hide nav by default */
+    nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        background: white;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    nav a {
+        margin: 8px 0;
+    }
 }
 
 nav a:hover {
