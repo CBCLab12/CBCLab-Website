@@ -249,10 +249,27 @@
         window.scrollTo({top: section.offsetTop - 80, behavior: "smooth"});
     }
 
-    // Optional: simple openForm stub
-    function openForm(testName){
-        alert("Booking form for: " + testName);
+    // Open booking modal from any "Book Now" button
+    function openForm(testName) {
+        const modal = document.getElementById("whatsappModal");
+        const testInput = document.getElementById("testNameInput");
+    
+        testInput.value = testName; // set the selected test
+        modal.style.display = "block";
     }
+    
+    // Close modal when clicking on X
+    document.querySelector("#whatsappModal .close").addEventListener("click", () => {
+        document.getElementById("whatsappModal").style.display = "none";
+    });
+    
+    // Close modal when clicking outside the modal content
+    window.addEventListener("click", (e) => {
+        const modal = document.getElementById("whatsappModal");
+        if (e.target === modal) {
+            modal.style.display = "none";
+        }
+    });
 </script>
 
 </body>
