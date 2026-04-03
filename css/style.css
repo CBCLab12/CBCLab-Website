@@ -35,7 +35,7 @@ header {
 
 /* Add this for image */
 .logo img {
-    max-height: 60px; /* reduce height on small screens */
+    max-height: 50px; /* reduce height on small screens */
     width: auto;
     display: block;
 }
