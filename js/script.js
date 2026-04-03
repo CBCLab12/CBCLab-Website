@@ -40,43 +40,6 @@ function renderCategories(){
 
 renderCategories();*/
 
-function switchTab(tab) {
-    const categorySection = document.getElementById("categorySection");
-    const subSection = document.getElementById("subCategorySection");
-
-    if (tab === 'cat') {
-        const isVisible = categorySection.style.display === "block";
-
-        if (isVisible) {
-            // 👉 Hide everything
-            categorySection.style.display = "none";
-            subSection.style.display = "none";
-            activeCategory = null;
-        } else {
-            categorySection.style.display = "block";
-
-            window.scrollTo({
-                top: categorySection.offsetTop - 80,
-                behavior: "smooth"
-            });
-        }
-    }
-}
-
-function showPackages(cat){
-    const container=document.getElementById("packageContainer");
-    const list=tests.filter(t=>t.category===cat);
-    container.innerHTML=list.map(t=>`
-        <div class="package-card">
-            <img src="${t.icon}" alt="${t.category}">
-            <h4>${t.name}</h4>
-            <p>Includes: ${t.includes}</p>
-            <p>Report: ${t.report}</p>
-            <button onclick="openForm('${t.name}')">Book Now</button>
-        </div>
-    `).join("");
-}
-
 // ====================
 // Subcategories per category (1mg-style, embedded in JS)
 // ====================
@@ -129,13 +92,73 @@ const subCategoryData = {
     ]
 };
 
-// Render subcategory for a selected category
+// Flatten subCategoryData into single tests array
+const tests = [];
+for (let cat in subCategoryData) {
+    subCategoryData[cat].forEach(test => {
+        tests.push({
+            name: test.name || "",
+            category: cat,
+            includes: test.includes || "",
+            report: test.report || "",
+            icon: test.icon || "🧪",
+            price: test.price || "",
+            popular: test.popular || false
+        });
+    });
+}
+
+function switchTab(tab) {
+    const categorySection = document.getElementById("categorySection");
+    const subSection = document.getElementById("subCategorySection");
+
+    if (tab === 'cat') {
+        const isVisible = categorySection.style.display === "block";
+
+        if (isVisible) {
+            // 👉 Hide everything
+            categorySection.style.display = "none";
+            subSection.style.display = "none";
+            activeCategory = null;
+        } else {
+            categorySection.style.display = "block";
+
+            window.scrollTo({
+                top: categorySection.offsetTop - 80,
+                behavior: "smooth"
+            });
+        }
+    }
+}
+
+// =======================
+// Show Packages for Category
+// =======================
+function showPackages(cat) {
+    const container = document.getElementById("packageContainer");
+    const list = tests.filter(t => t.category === cat);
+
+    container.innerHTML = list.map(t => `
+        <div class="package-card">
+            <div class="package-icon">${t.icon}</div>
+            <h4>${t.name}</h4>
+            <p>Includes: ${t.includes}</p>
+            <p>Report: ${t.report}</p>
+            <p>Price: ₹${t.price}</p>
+            ${t.popular ? '<span class="badge">Popular</span>' : ''}
+            <button onclick="openForm('${t.name}')">Book Now</button>
+        </div>
+    `).join("");
+}
+
+// =======================
+// Show Subcategories
+// =======================
 function showSubCategory(category) {
     const container = document.getElementById("subCategoryContainer");
     const section = document.getElementById("subCategorySection");
     const title = document.getElementById("subCategoryTitle");
 
-    // Toggle hide if same category clicked
     if (activeCategory === category) {
         section.style.display = "none";
         activeCategory = null;
@@ -147,18 +170,15 @@ function showSubCategory(category) {
     title.innerText = category + " Tests";
 
     const data = subCategoryData[category];
-
     if (!data || data.length === 0) {
         container.innerHTML = "<p>No tests available</p>";
         section.style.display = "block";
         return;
     }
 
-    // Render premium 1mg-style cards with emoji icons
     data.forEach(test => {
         const card = document.createElement("div");
         card.className = "sub-card";
-
         card.innerHTML = `
             <div class="sub-top">
                 <span class="sub-icon">${test.icon}</span>
@@ -179,11 +199,62 @@ function showSubCategory(category) {
     });
 
     section.style.display = "block";
+    window.scrollTo({ top: section.offsetTop - 80, behavior: "smooth" });
+}
 
-    window.scrollTo({
-        top: section.offsetTop - 80,
-        behavior: "smooth"
-    });
+// =======================
+// Search Tests
+// =======================
+function searchTest() {
+    const val = document.getElementById("search").value.trim().toLowerCase();
+    const container = document.getElementById("packageContainer");
+    const subCategorySection = document.getElementById("subCategorySection");
+
+    if (val === "") {
+    container.innerHTML = "";
+    container.classList.remove("active");
+
+    // ✅ Hide all dynamic sections
+    document.getElementById("categorySection").style.display = "none";
+    subCategorySection.style.display = "none";
+
+    // ✅ Scroll back to hero (important)
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    return;
+}
+
+    subCategorySection.style.display = "none";
+    container.classList.add("active");           // show container as grid
+
+    const filtered = tests.filter(t =>
+        (t.name || "").toLowerCase().includes(val) ||
+        (t.category || "").toLowerCase().includes(val) ||
+        (t.includes || "").toLowerCase().includes(val)
+    );
+
+    if (filtered.length === 0) {
+        container.innerHTML = "<p>No tests found</p>";
+    } else {
+        container.innerHTML = filtered.map(t => `
+            <div class="sub-card">
+                <div class="sub-top">
+                    <span class="sub-icon">${t.icon}</span>
+                    <h3>${t.name}</h3>
+                    ${t.popular ? '<span class="badge">Popular</span>' : ''}
+                </div>
+                <p class="includes">🧪 ${t.includes}</p>
+                <div class="sub-meta">
+                    <span>⏱ ${t.report}</span>
+                    <span class="price">
+                        <del>₹${parseInt(t.price) + 300}</del>
+                        <b>₹${t.price}</b>
+                    </span>
+                </div>
+                <button class="book-btn" onclick="openForm('${t.name}')">Book Now</button>
+            </div>
+        `).join("");
+    }
 }
 
 // ===== Switch Tabs (Categories) =====
@@ -208,57 +279,65 @@ function switchTab(tab) {
     }
 }
 
-/*function searchTest(){
-    const val=document.getElementById("search").value.toLowerCase();
-    const container=document.getElementById("packageContainer");
-    const list=tests.filter(t=>t.name.toLowerCase().includes(val));
-    container.innerHTML=list.map(t=>`
-        <div class="package-card">
-            <img src="${t.icon}" alt="${t.category}">
-            <h4>${t.name}</h4>
-            <p>Includes: ${t.includes}</p>
-            <p>Report: ${t.report}</p>
-            <button onclick="openForm('${t.name}')">Book Now</button>
-        </div>
-    `).join("");
-}*/
+// =======================
+// Booking Form
+// =======================
+let currentBookingTest = null;
+function openForm(testName) {
+    currentBookingTest = testName;
+    document.getElementById("form").style.display = "block";
+    document.getElementById("form-title").textContent = `Book Test: ${testName}`;
+    document.getElementById("userName").value = "";
+    document.getElementById("userPhone").value = "";
+    document.getElementById("testDate").value = "";
+}
 
-function searchTest() {
-    const val = document.getElementById("search").value.toLowerCase();
-    const container = document.getElementById("packageContainer");
+function closeForm() {
+    document.getElementById("form").style.display = "none";
+}
 
-    const filtered = tests.filter(t =>
-        t.name.toLowerCase().includes(val) ||
-        t.category.toLowerCase().includes(val) ||
-        t.includes.toLowerCase().includes(val)
-    );
+// =======================
+// Live Location Detection
+// =======================
+function detectLiveLocation() {
+    const searchInput = document.getElementById("search");
 
-    if (filtered.length === 0) {
-        container.innerHTML = "<p>No tests found</p>";
+    // Check if location already saved in sessionStorage
+    const savedArea = sessionStorage.getItem("userArea");
+    if (savedArea) {
+        searchInput.placeholder = `Search tests in ${savedArea}`;
         return;
     }
 
-    container.innerHTML = filtered.map(t => `
-        <div class="package-card">
-            <img src="${t.icon}" alt="${t.category}">
-            <h4>${t.name}</h4>
-            <p>Includes: ${t.includes}</p>
-            <p>Report: ${t.report}</p>
-            <button onclick="openForm('${t.name}')">Book Now</button>
-        </div>
-    `).join("");
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+            async pos => {
+                const lat = pos.coords.latitude;
+                const lon = pos.coords.longitude;
+
+                try {
+                    const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
+                    const data = await res.json();
+
+                    const area = data.address.suburb || data.address.neighbourhood || data.address.city;
+                    if (area) {
+                        searchInput.placeholder = `Search tests in ${area}`;
+                        sessionStorage.setItem("userArea", area);
+                    } else {
+                        searchInput.placeholder = "Search tests...";
+                    }
+                } catch {
+                    searchInput.placeholder = "Search tests...";
+                }
+            },
+            () => { searchInput.placeholder = "Search tests..."; }
+        );
+    } else {
+        searchInput.placeholder = "Search tests...";
+    }
 }
 
-function openForm(testName){
-    currentBookingTest=testName;
-    document.getElementById("form").style.display="block";
-    document.getElementById("form-title").textContent=`Book Test: ${testName}`;
-    document.getElementById("userName").value="";
-    document.getElementById("userPhone").value="";
-    document.getElementById("testDate").value="";
-}
-
-function closeForm(){ document.getElementById("form").style.display="none"; }
+detectLiveLocation();
 
 /*function detectLocation(){
     const locationEl=document.getElementById("location");
@@ -314,46 +393,7 @@ detectLocation();*/
     }
 }*/
 
-function detectLiveLocation() {
-    const searchInput = document.getElementById("search");
-
-    if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(
-            async (pos) => {
-                const lat = pos.coords.latitude;
-                const lon = pos.coords.longitude;
-
-                try {
-                    const res = await fetch(
-                        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`
-                    );
-                    const data = await res.json();
-
-                    const area =
-                        data.address.suburb ||
-                        data.address.neighbourhood ||
-                        data.address.city;
-
-                    if (area) {
-                        searchInput.placeholder = `Search tests in ${area}`;
-                    } else {
-                        searchInput.placeholder = "Search tests...";
-                    }
-
-                } catch (err) {
-                    searchInput.placeholder = "Search tests...";
-                }
-            },
-            () => {
-                searchInput.placeholder = "Search tests...";
-            }
-        );
-    }
-}
-
-detectLiveLocation();
-
-document.getElementById("search").addEventListener("input", function () {
+/*document.getElementById("search").addEventListener("input", function () {
     const val = this.value.toLowerCase();
     const container = document.getElementById("packageContainer");
 
@@ -377,7 +417,7 @@ document.getElementById("search").addEventListener("input", function () {
             <button onclick="openForm('${t.name}')">Book Now</button>
         </div>
     `).join("");
-});
+});*/
 
 // ===== OPEN MODAL =====
 var modal = document.getElementById("whatsappModal");
@@ -441,8 +481,8 @@ document.getElementById("bookingForm").onsubmit = function(e) {
     var hour = new Date().getHours();
     var agentNumber;
 
-    if (hour >= 9 && hour < 18) agentNumber = numbers[0];
-    else if (hour >= 18 && hour < 23) agentNumber = numbers[1];
+    if (hour >= 8 && hour < 14) agentNumber = numbers[0];
+    else if (hour >= 14 && hour < 20) agentNumber = numbers[1];
     else agentNumber = numbers[2];
 
     if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
@@ -453,3 +493,45 @@ document.getElementById("bookingForm").onsubmit = function(e) {
 
     modal.style.display = "none";
 };
+// ===== OPEN WHATSAPP MODAL FOR SEARCH RESULTS =====
+function openWhatsAppModal(testName) {
+    // Show the modal
+    modal.style.display = "block";
+
+    // Pre-fill the "name" field with the test name
+    var nameInput = document.getElementById("name");
+    nameInput.value = testName;
+
+    // Clear other fields
+    document.getElementById("phone").value = "";
+    document.getElementById("address").value = "";
+}
+
+function callNow() {
+    // Define your numbers with their time ranges (24-hour format)
+    const numbers = [
+        { number: "1234567890", startHour: 8, endHour: 16 },  // 8 AM to 4 PM
+        { number: "0987654321", startHour: 16, endHour: 22 }, // 4 PM to 10 PM
+        { number: "1122334455", startHour: 22, endHour: 8 }   // 10 PM to 8 AM (overnight)
+    ];
+
+    const now = new Date();
+    const hour = now.getHours();
+
+    // Find the number matching current time
+    const currentNumber = numbers.find(n => {
+        if (n.startHour < n.endHour) {
+            return hour >= n.startHour && hour < n.endHour;
+        } else {
+            // Overnight case (e.g., 22 to 8)
+            return hour >= n.startHour || hour < n.endHour;
+        }
+    });
+
+    if (currentNumber) {
+        // Redirect to call the number
+        window.location.href = `tel:${currentNumber.number}`;
+    } else {
+        alert("Sorry, no contact number available at this time.");
+    }
+}
