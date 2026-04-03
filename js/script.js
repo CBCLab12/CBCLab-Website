@@ -477,7 +477,7 @@ document.getElementById("bookingForm").onsubmit = function(e) {
     var message = `Hello! I want to book a lab test.\nName: ${name}\nPhone: ${phone}\nAddress: ${address}`;
     var encodedMessage = encodeURIComponent(message);
 
-    var numbers = ["919876543210", "919812345678", "919800000000"];
+    var numbers = ["919867915433", "919326220296", "919372026433"];
     var hour = new Date().getHours();
     var agentNumber;
 
@@ -510,9 +510,9 @@ function openWhatsAppModal(testName) {
 function callNow() {
     // Define your numbers with their time ranges (24-hour format)
     const numbers = [
-        { number: "1234567890", startHour: 8, endHour: 16 },  // 8 AM to 4 PM
-        { number: "0987654321", startHour: 16, endHour: 22 }, // 4 PM to 10 PM
-        { number: "1122334455", startHour: 22, endHour: 8 }   // 10 PM to 8 AM (overnight)
+        { number: "9867915433", startHour: 8, endHour: 16 },  // 8 AM to 4 PM
+        { number: "9326220296", startHour: 16, endHour: 22 }, // 4 PM to 10 PM
+        { number: "9372026433", startHour: 22, endHour: 8 }   // 10 PM to 8 AM (overnight)
     ];
 
     const now = new Date();
