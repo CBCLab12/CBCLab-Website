@@ -12,8 +12,8 @@
     <!-- Header -->
     <header>
         <div class="logo">
-		<img src="images/logo/CBCLogo_13.jpeg" alt="CBC Lab">
-	</div>
+        <img src="images/logo/CBCLogo_5.jpeg" alt="CBC Lab">
+    </div>
         <nav>
             <a href="index.html">Home</a>
             <a href="tests.html">Tests</a>
@@ -27,148 +27,119 @@
         <div class="hero-text">
             <h1>Book Lab Tests From Home</h1>
             <p>Fast • Safe • Home Sample Collection</p>
-            <!--button onclick="location.href='tests.html'">Browse Tests</button>
-	    <!-- Search -->
+            <!--button onclick="location.href='tests.html'">Browse Tests</button-->
+        <!-- Search -->
             <div class="search-box">
                <div class="search-container">
-                  <input type="text" id="search" placeholder="Detecting location...">
+                  <input type="text" id="search" placeholder="Detecting location..." oninput="searchTest()">
                   <button class="search-btn" onclick="searchTest()">🔍</button>		  
-    		  <button class="search-btn" id="tab-cat" onclick="switchTab('cat')">📂</button>
+                  <button class="search-btn" id="tab-cat" onclick="switchTab('cat')">📂</button>
                </div>
             </div>
         </div>
     </section>
-    
-    <!-- Browse by Category -->
-    <div id="categorySection" class="category-section" style="display:none;">
-       <div class="category-grid">
 
-          <div class="category-card" onclick="showSubCategory('Blood & CBC')">
-             <div class="icon">🩸</div>
-             <h3>Blood & CBC</h3>
-             <p>26 tests</p>
-          </div>
+    <!-- Wrap main dynamic content inside mainContent -->
+    <div id="mainContent">
 
-          <div class="category-card" onclick="showSubCategory('Liver')">
-             <div class="icon">❤️</div>
-             <h3>Liver</h3>
-             <p>83 tests</p>
-          </div>
+        <!-- Browse by Category -->
+        <div id="categorySection" class="category-section" style="display:none;">
+           <div class="category-grid">
 
-          <div class="category-card" onclick="showSubCategory('Kidney')">
-             <div class="icon">🫘</div>
-             <h3>Kidney</h3>
-             <p>38 tests</p>
-          </div>
+              <div class="category-card" onclick="showSubCategory('Blood & CBC')">
+                 <div class="icon">🩸</div>
+                 <h3>Blood & CBC</h3>
+                 <p>26 tests</p>
+              </div>
 
-          <div class="category-card" onclick="showSubCategory('Thyroid')">
-             <div class="icon">🦋</div>
-             <h3>Thyroid</h3>
-             <p>25 tests</p>
-          </div>
+              <div class="category-card" onclick="showSubCategory('Liver')">
+                 <div class="icon">❤️</div>
+                 <h3>Liver</h3>
+                 <p>83 tests</p>
+              </div>
 
-          <div class="category-card" onclick="showSubCategory('Diabetes')">
-             <div class="icon">💉</div>
-             <h3>Diabetes</h3>
-             <p>30 tests</p>
-          </div>
+              <div class="category-card" onclick="showSubCategory('Kidney')">
+                 <div class="icon">🫘</div>
+                 <h3>Kidney</h3>
+                 <p>38 tests</p>
+              </div>
 
-          <div class="category-card" onclick="showSubCategory('Lipid & Heart')">
-             <div class="icon">💓</div>
-             <h3>Lipid & Heart</h3>
-             <p>22 tests</p>
-          </div>
+              <div class="category-card" onclick="showSubCategory('Thyroid')">
+                 <div class="icon">🦋</div>
+                 <h3>Thyroid</h3>
+                 <p>25 tests</p>
+              </div>
 
-          <div class="category-card" onclick="showSubCategory('Vitamins')">
-             <div class="icon">✨</div>
-             <h3>Vitamins</h3>
-             <p>38 tests</p>
-          </div>
+              <div class="category-card" onclick="showSubCategory('Diabetes')">
+                 <div class="icon">💉</div>
+                 <h3>Diabetes</h3>
+                 <p>30 tests</p>
+              </div>
 
-          <div class="category-card" onclick="showSubCategory('Hormones')">
-             <div class="icon">⚡</div>
-             <h3>Hormones</h3>
-             <p>47 tests</p>
-          </div>
+              <div class="category-card" onclick="showSubCategory('Lipid & Heart')">
+                 <div class="icon">💓</div>
+                 <h3>Lipid & Heart</h3>
+                 <p>22 tests</p>
+              </div>
 
-          <div class="category-card" onclick="showSubCategory('Infections')">
-             <div class="icon">🛡️</div>
-             <h3>Infections</h3>
-             <p>160 tests</p>
-          </div>
+              <div class="category-card" onclick="showSubCategory('Vitamins')">
+                 <div class="icon">✨</div>
+                 <h3>Vitamins</h3>
+                 <p>38 tests</p>
+              </div>
 
-          <div class="category-card" onclick="showSubCategory('Cancer Markers')">
-             <div class="icon">🔬</div>
-             <h3>Cancer Markers</h3>
-             <p>35 tests</p>
-          </div>
+              <div class="category-card" onclick="showSubCategory('Hormones')">
+                 <div class="icon">⚡</div>
+                 <h3>Hormones</h3>
+                 <p>47 tests</p>
+              </div>
 
-          <div class="category-card" onclick="showSubCategory('Urine & Stool')">
-             <div class="icon">🧪</div>
-             <h3>Urine & Stool</h3>
-             <p>233 tests</p>
-          </div>
+              <div class="category-card" onclick="showSubCategory('Infections')">
+                 <div class="icon">🛡️</div>
+                 <h3>Infections</h3>
+                 <p>160 tests</p>
+              </div>
 
-          <div class="category-card" onclick="showSubCategory('Allergy')">
-             <div class="icon">🌿</div>
-             <h3>Allergy</h3>
-             <p>207 tests</p>
-          </div>
+              <div class="category-card" onclick="showSubCategory('Cancer Markers')">
+                 <div class="icon">🔬</div>
+                 <h3>Cancer Markers</h3>
+                 <p>35 tests</p>
+              </div>
 
-          <div class="category-card" onclick="showSubCategory('Wellness Packages')">
-             <div class="icon">💊</div>
-             <h3>Wellness Packages</h3>
-             <p>259 tests</p>
-          </div>
+              <div class="category-card" onclick="showSubCategory('Urine & Stool')">
+                 <div class="icon">🧪</div>
+                 <h3>Urine & Stool</h3>
+                 <p>233 tests</p>
+              </div>
 
-       </div>
-    </div>
-    
-    <div id="subCategorySection" class="subcategory-section" style="display:none;">
-       <h2 id="subCategoryTitle"></h2>
-       <div id="subCategoryContainer" class="subcategory-grid"></div>
-    </div>
-    
-    <!-- Location -->
-    <!--div class="location" id="location">Detecting location...</div>
-    
-    <!-- Popular Tests -->
-    <!--div class="container">
-        <h2>Popular Tests</h2>
-        <div class="grid">
-            <div class="card">
-                <img src="images/test/blood-test.jpg" alt="Blood Test">
-                <div class="card-content">
-                    <h3>Blood Test</h3>
-                    <p>Complete blood health check.</p>
-                    <button onclick="location.href='test-details.html'">View Details</button>
-                </div>
-            </div>
-            <div class="card">
-                <img src="images/test/diabetes-test.jpg" alt="Diabetes Test">
-                <div class="card-content">
-                    <h3>Diabetes Test</h3>
-                    <p>Check sugar levels quickly.</p>
-                    <button onclick="location.href='test-details.html'">View Details</button>
-                </div>
-            </div>
-            <div class="card">
-                <img src="images/test/thyroid-test.jpg" alt="Thyroid Test">
-                <div class="card-content">
-                    <h3>Thyroid Test</h3>
-                    <p>Analyze thyroid hormone levels.</p>
-                    <button onclick="location.href='test-details.html'">View Details</button>
-                </div>
-            </div>
+              <div class="category-card" onclick="showSubCategory('Allergy')">
+                 <div class="icon">🌿</div>
+                 <h3>Allergy</h3>
+                 <p>207 tests</p>
+              </div>
+
+              <div class="category-card" onclick="showSubCategory('Wellness Packages')">
+                 <div class="icon">💊</div>
+                 <h3>Wellness Packages</h3>
+                 <p>259 tests</p>
+              </div>
+
+           </div>
         </div>
-    </div>
 
-    <!-- Horizontal Categories -->
-    <div class="horizontal-categories" id="horizontalCategories"></div>
+        <!-- Container for Tests / Search Results -->
+        <div id="packageContainer" class="package-container"></div>
+        
+        <div id="subCategorySection" class="subcategory-section" style="display:none;">
+           <h2 id="subCategoryTitle"></h2>
+           <div id="subCategoryContainer" class="subcategory-grid"></div>
+        </div>
 
-    <!-- Package Cards -->
-    <div class="package-container" id="packageContainer"></div>
+    </div> <!-- end mainContent -->
 
+    <!-- Location -->
+    <!--div class="location" id="location">Detecting location...</div-->
+    
     <!-- Booking Form -->
     <div class="form-popup" id="form">
         <h3 id="form-title">Book Test</h3>
@@ -205,7 +176,7 @@
 
     <!-- Floating Contact Buttons -->
     <div class="contact-buttons">
-        <a href="#" id="callNowBtn">📞 Call Now</a>
+        <a href="javascript:void(0)" id="callNowBtn" onclick="callNow()">📞 Call Now</a>
         <a href="#" id="whatsappBtn">💬 Book Appointment</a>
    </div>
 
@@ -215,15 +186,20 @@
         <span class="close">&times;</span>
         <h2>Book Lab Appointment</h2>
         <form id="bookingForm">
-            <label for="name">Name:</label>
-            <input type="text" id="name" required placeholder="Your Name">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" required placeholder="Enter your name">
 
-            <label for="phone">Phone:</label>
-	    <input type="tel" id="phone" required placeholder="Your Phone">
-            <span id="phoneError" style="color: red; font-size: 13px; display: none;">Please enter a valid 10-digit Indian mobile number starting with 6-9.</span>
+            <label for="testName">Test Name:</label>
+            <input type="text" id="testNameInput" readonly style="background:#f0f0f0;">
+
+            <label for="phone">Mobile Number:</label>
+            <input type="tel" id="phone" required placeholder="Enter 10-digit mobile number">
+            <span id="phoneError" style="color: red; font-size: 13px; display: none;">
+                Please enter a valid 10-digit Indian mobile number starting with 6-9.
+            </span>
 
             <label for="address">Address:</label>
-            <textarea id="address" required placeholder="Your Address"></textarea>
+            <textarea id="address" required placeholder="Enter your address"></textarea>
 
             <button type="submit">Send via WhatsApp</button>
         </form>
