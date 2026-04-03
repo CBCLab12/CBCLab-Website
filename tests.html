@@ -138,6 +138,29 @@
 
 </div>
 
+<!-- Modal Booking Form -->
+<div id="whatsappModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Book Lab Appointment</h2>
+    <form id="bookingForm">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" required placeholder="Enter your name">
+
+      <label for="testName">Test Name:</label>
+      <input type="text" id="testNameInput" readonly style="background:#f0f0f0;">
+
+      <label for="phone">Mobile Number:</label>
+      <input type="tel" id="phone" required placeholder="Enter 10-digit mobile number">
+
+      <label for="address">Address:</label>
+      <textarea id="address" required placeholder="Enter your address"></textarea>
+
+      <button type="submit">Send via WhatsApp</button>
+    </form>
+  </div>
+</div>
+
 <footer>
     <p>© 2026 CBC Lab</p>
 </footer>
