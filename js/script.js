@@ -40,12 +40,19 @@ function renderCategories(){
 
 renderCategories();*/
 
-// Hamburger toggle
+// Hamburger menu toggle
 const hamburger = document.getElementById("hamburger");
 const navLinks = document.getElementById("nav-links");
 
 hamburger.addEventListener("click", () => {
     navLinks.classList.toggle("active");
+});
+
+// Optional: close nav when a link is clicked (mobile-friendly)
+document.querySelectorAll("#nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+    });
 });
 
 // ====================
