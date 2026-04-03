@@ -18,36 +18,27 @@ header {
     align-items: center;
     padding: 10px 20px;
     background: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     position: sticky;
     top: 0;
     z-index: 100;
-    height: 70px; /* fix header height */
+    flex-wrap: nowrap; /* prevent wrapping on small screens */
 }
 
 /* Logo */
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: red;
-    display: flex;
-    align-items: center;
-}
-
 .logo img {
-    max-height: 60px; /* reduce height on small screens */
+    height: 50px; /* reduce height for mobile-friendly */
     width: auto;
     display: block;
 }
 
-/* Nav */
+/* Nav links */
 nav {
     display: flex;
-    gap: 15px;
+    gap: 20px;
 }
 
 nav a {
-    margin: 0 12px;
     text-decoration: none;
     color: #333;
     font-weight: 500;
@@ -58,31 +49,38 @@ nav a:hover {
     color: #3498db;
 }
 
-/* Hamburger hidden by default */
+/* Hamburger menu hidden by default */
 .hamburger {
     display: none;
     font-size: 28px;
     cursor: pointer;
 }
 
-/* Mobile Styles */
+/* Mobile styles */
 @media (max-width: 768px) {
-    /* Show hamburger */
+    header {
+        justify-content: space-between;
+        align-items: center;
+    }
+
     .hamburger {
         display: block;
     }
 
-    /* Hide nav by default */
     nav {
-        display: none;
+        display: none; /* hide nav initially */
         flex-direction: column;
-        position: absolute;
-        top: 70px;
-        right: 20px;
+        position: fixed; /* fix position over content */
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 200px;
         background: white;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-        border-radius: 8px;
-        padding: 10px;
+        box-shadow: -4px 0 15px rgba(0,0,0,0.2);
+        padding: 60px 20px 20px 20px; /* leave space for header */
+        gap: 15px;
+        z-index: 99;
+        overflow-y: auto;
     }
 
     nav.active {
@@ -90,12 +88,9 @@ nav a:hover {
     }
 
     nav a {
-        margin: 8px 0;
+        margin: 0;
+        font-size: 18px;
     }
-}
-
-nav a:hover {
-    color: #3498db;
 }
 
 /* HERO */
