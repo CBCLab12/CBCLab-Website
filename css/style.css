@@ -84,21 +84,18 @@ nav a.active {
 
 /* ================= MOBILE ================= */
 @media (max-width: 768px) {
-    
-    /* Header becomes column for dropdown */
+
     header {
         flex-direction: column;
         align-items: stretch;
     }
 
-    /* Hamburger visible */
     .hamburger {
         display: block;
     }
 
-    /* NAV DROPDOWN */
     nav {
-        flex-direction: column;
+        display: block;        /* change from flex to block */
         width: 100%;
         max-height: 0;
         overflow: hidden;
@@ -107,17 +104,18 @@ nav a.active {
     }
 
     nav.active {
-        max-height: 300px;   /* adjust as needed for your links */
+        max-height: 1000px;    /* ensure all links fit */
     }
 
-    /* MOBILE NAV LINKS FIXED HEIGHT & FULL WIDTH */
+    /* MOBILE NAV LINKS FIXED HEIGHT */
     nav a {
-        display: block;            /* fills width */
-        height: 50px;              /* SAME HEIGHT FOR ALL */
-        line-height: 50px;         /* vertically center text */
-        padding: 0 20px;           /* horizontal padding */
-        border-bottom: 1px solid #eee;
+        display: block;        /* full width block */
+        min-height: 50px;      /* uniform row height */
+        line-height: 50px;     /* vertically center text */
+        padding: 0 20px;       /* horizontal padding */
         text-align: left;
+        border-bottom: 1px solid #eee;
+        box-sizing: border-box; /* ensures padding counted in height */
     }
 
     nav a:last-child {
