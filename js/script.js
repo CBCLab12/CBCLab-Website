@@ -508,8 +508,8 @@ document.getElementById("bookingForm").onsubmit = function(e) {
     var hour = new Date().getHours();
     var agentNumber;
 
-    if (hour >= 8 && hour < 14) agentNumber = numbers[0];
-    else if (hour >= 14 && hour < 20) agentNumber = numbers[1];
+    if (hour >= 8 && hour < 16) agentNumber = numbers[0];
+    else if (hour >= 16 && hour < 24) agentNumber = numbers[1];
     else agentNumber = numbers[2];
 
     if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
@@ -537,9 +537,9 @@ function openWhatsAppModal(testName) {
 function callNow() {
     // Define your numbers with their time ranges (24-hour format)
     const numbers = [
-        { number: "9867915433", startHour: 8, endHour: 16 },  // 8 AM to 4 PM
-        { number: "9326220296", startHour: 16, endHour: 22 }, // 4 PM to 10 PM
-        { number: "9372026433", startHour: 22, endHour: 8 }   // 10 PM to 8 AM (overnight)
+        { number: "+919867915433", startHour: 8, endHour: 16 },  // 8 AM to 4 PM
+        { number: "+919326220296", startHour: 16, endHour: 24 }, // 4 PM to 12 AM
+        { number: "+919372026433", startHour: 24, endHour: 8 }   // 12 AM to 8 AM (overnight)
     ];
 
     const now = new Date();
