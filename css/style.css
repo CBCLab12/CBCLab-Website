@@ -14,7 +14,8 @@ body {
 /* Header base */
 header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column; /* stack top-bar + nav */
+    /*justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
     background: white;
@@ -23,6 +24,14 @@ header {
     top: 0;
     z-index: 100;
     flex-wrap: nowrap; /* prevent wrapping on small screens */
+}
+
+/* Top row (logo + hamburger) */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
 }
 
 /* Logo */
@@ -63,10 +72,6 @@ nav a:hover {
 
 /* Mobile styles */
 @media (max-width: 768px) {
-    header {
-        flex-wrap: wrap; /* IMPORTANT */
-    }
-
     .hamburger {
         display: block;
     }
