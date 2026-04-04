@@ -66,7 +66,7 @@ nav a:hover {
 /* ACTIVE LINK */
 nav a.active {
     color: #3498db;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 /* Hamburger menu hidden by default */
@@ -117,6 +117,8 @@ nav a.active {
     }
 
     nav a {
+        width: 100%;
+        justify-content: flex-start;
         padding: 12px 20px;
         border-bottom: 1px solid #eee;
     }
