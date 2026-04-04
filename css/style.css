@@ -26,6 +26,11 @@ header {
 }
 
 /* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
 .logo img {
     height: 50px; /* reduce height for mobile-friendly */
     width: auto;
@@ -59,8 +64,7 @@ nav a:hover {
 /* Mobile styles */
 @media (max-width: 768px) {
     header {
-        justify-content: space-between;
-        align-items: center;
+        flex-wrap: wrap; /* IMPORTANT */
     }
 
     .hamburger {
@@ -68,19 +72,13 @@ nav a:hover {
     }
 
     nav {
-        display: none; /* hide nav initially */
+        display: none;
         flex-direction: column;
-        position: fixed; /* fix position over content */
-        top: 0;
-        right: 0;
-        height: 100vh;
-        width: 200px;
+        width: 100%;
         background: white;
-        box-shadow: -4px 0 15px rgba(0,0,0,0.2);
-        padding: 60px 20px 20px 20px; /* leave space for header */
-        gap: 15px;
-        z-index: 99;
-        overflow-y: auto;
+        margin-top: 10px;
+        padding: 10px 0;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     nav.active {
@@ -88,8 +86,8 @@ nav a:hover {
     }
 
     nav a {
-        margin: 0;
-        font-size: 18px;
+        padding: 10px 20px;
+        border-top: 1px solid #eee;
     }
 }
 
