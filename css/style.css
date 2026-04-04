@@ -83,7 +83,9 @@ nav a:hover {
         background: white;
         margin-top: 10px;
         padding: 10px 0;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+
+        border-top: 1px solid #eee;
     }
 
     nav.active {
@@ -92,7 +94,12 @@ nav a:hover {
 
     nav a {
         padding: 10px 20px;
-        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+        font-size: 16px;
+    }
+
+    nav a:last-child {
+        border-bottom: none;
     }
 }
 
