@@ -5,46 +5,31 @@
     <title>CBC Lab - Lab Tests | Mumbai</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        /* ===== Minimal styling for demonstration ===== */
-        .category-grid {display:flex; flex-wrap:wrap; gap:10px;}
-        .category-card {flex: 1 1 calc(25% - 10px); max-width: 220px; padding: 15px; border:1px solid #ddd; border-radius:10px; text-align:center; cursor:pointer; background:#fff; transition:0.2s;}
-        .category-card:hover {box-shadow:0 0 10px rgba(0,0,0,0.1);}
-        .category-card .icon {font-size:30px;}
-        .subcategory-section {margin-top:30px;}
-        .subcategory-grid {display:flex; flex-wrap:wrap; gap:15px;}
-        .sub-card {flex:1 1 200px; border:1px solid #ddd; border-radius:10px; padding:15px; background:#fff; transition:0.2s;}
-        .sub-card:hover {box-shadow:0 0 10px rgba(0,0,0,0.1);}
-        .sub-top {display:flex; justify-content:space-between; align-items:center;}
-        .sub-top h3 {margin:0; font-size:16px;}
-        .badge {background:#ff9800; color:#fff; padding:2px 6px; border-radius:5px; font-size:12px;}
-        .sub-meta {display:flex; justify-content:space-between; margin-top:10px; font-size:14px;}
-        .price del {color:#888; margin-right:5px;}
-        .book-btn {margin-top:10px; padding:6px 10px; background:#4CAF50; color:#fff; border:none; border-radius:5px; cursor:pointer;}
-        .book-btn:hover {background:#45a049;}
-    </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">
-    <img src="images/logo/CBCLogo_5.jpeg" alt="CBC Lab">
-  </div>
-
-  <!-- Hamburger menu for mobile -->
-  <div class="hamburger" id="hamburger">☰</div>
-
-  <nav id="nav-links">
-    <a href="index.html">Home</a>
-    <a href="tests.html">Tests</a>
-    <a href="reports.html">Reports</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-</header>
+<!-- Header -->
+    <header>
+	<div class="top-bar">
+        <div class="logo"><img src="images/logo/CBCLogo_5.jpeg" alt="CBC Lab"></div>
+	<div class="hamburger" id="hamburger">☰</div>
+	</div>
+        <nav id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="tests.html">Tests</a>
+            <a href="reports.html">Reports</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+	
+<section class="hero">
+	<div style="color:white; text-align:center; padding: 80px 20px;">
+		<h1>CBC All Available Tests</h1>
+		<p>Please book your appointment today.</p>
+	</div>
+</section>
 
 <div class="container">
-    <h2>Available Tests</h2>
-
     <!-- Browse by Category -->
     <div id="categorySection" class="category-section">
         <div class="category-grid">
@@ -138,162 +123,44 @@
 
 </div>
 
-<!-- Modal Booking Form -->
-<div id="whatsappModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>Book Lab Appointment</h2>
-    <form id="bookingForm">
-      <label for="name">Your Name:</label>
-      <input type="text" id="name" required placeholder="Enter your name">
-
-      <label for="testName">Test Name:</label>
-      <input type="text" id="testNameInput" readonly style="background:#f0f0f0;">
-
-      <label for="phone">Mobile Number:</label>
-      <input type="tel" id="phone" required placeholder="Enter 10-digit mobile number">
-
-      <label for="address">Address:</label>
-      <textarea id="address" required placeholder="Enter your address"></textarea>
-
-      <button type="submit">Send via WhatsApp</button>
-    </form>
-  </div>
-</div>
-
 <footer>
     <p>© 2026 CBC Lab</p>
 </footer>
 
-<script>
-    // ===== Sample Subcategory Data =====
-    const subCategoryData = {
-        "Blood & CBC": [
-            {name:"CBC Test", includes:"Complete Blood Count", report:"12 hrs", price:"₹500", icon:"🩸"},
-            {name:"Hemoglobin Test", includes:"Hb, RBC, WBC", report:"12 hrs", price:"₹300", icon:"🩸"}
-        ],
-        "Liver": [
-            {name:"LFT", includes:"SGPT, SGOT, Bilirubin", report:"24 hrs", price:"₹600", icon:"❤️"}
-        ],
-        "Kidney": [
-            {name:"Kidney Function Test", includes:"Urea, Creatinine", report:"24 hrs", price:"₹500", icon:"🫘"}
-        ],
-        "Thyroid": [
-            {name:"Thyroid Panel", includes:"TSH, T3, T4", report:"24 hrs", price:"₹700", icon:"🦋"}
-        ],
-        "Diabetes": [
-            {name:"Fasting Blood Sugar", includes:"Glucose Fasting", report:"12 hrs", price:"₹300", icon:"💉"}
-        ],
-        "Lipid & Heart": [
-            {name:"Lipid Profile", includes:"Cholesterol, HDL, LDL, Triglycerides", report:"24 hrs", price:"₹800", icon:"💓"}
-        ],
-        "Vitamins": [
-            {name:"Vitamin D & B12", includes:"Vitamin D, B12", report:"24 hrs", price:"₹500", icon:"✨"}
-        ],
-        "Hormones": [
-            {name:"Hormone Panel", includes:"Estrogen, Testosterone, Progesterone", report:"24–48 hrs", price:"₹900", icon:"⚡"}
-        ],
-        "Infections": [
-            {name:"COVID-19 Test", includes:"RT-PCR", report:"24 hrs", price:"₹1200", icon:"🛡️"}
-        ],
-        "Cancer Markers": [
-            {name:"PSA Test", includes:"Prostate Specific Antigen", report:"24–48 hrs", price:"₹1100", icon:"🔬"}
-        ],
-        "Urine & Stool": [
-            {name:"Urine Routine", includes:"pH, Sugar, Protein", report:"12 hrs", price:"₹400", icon:"🧪"}
-        ],
-        "Allergy": [
-            {name:"Allergy Test", includes:"IgE, Specific Allergen Tests", report:"48 hrs", price:"₹1500", icon:"🌿"}
-        ],
-        "Wellness Packages": [
-            {name:"Full Body Checkup", includes:"CBC, Sugar, Lipid, Kidney", report:"24–48 hrs", price:"₹2500", icon:"💊"}
-        ]
-    };
+    <!-- Floating Contact Buttons -->
+    <div class="contact-buttons">
+        <a href="javascript:void(0)" id="callNowBtn" onclick="callNow()">📞 Call Now</a>
+        <a href="#" id="whatsappBtn">💬 Book Appointment</a>
+   </div>
 
-    // Hamburger menu toggle
-    const hamburger = document.getElementById("hamburger");
-    const navLinks = document.getElementById("nav-links");
-    
-    hamburger.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
-    });
-    
-    // Optional: close nav when a link is clicked (mobile-friendly)
-    document.querySelectorAll("#nav-links a").forEach(link => {
-        link.addEventListener("click", () => {
-            navLinks.classList.remove("active");
-        });
-    });
-    
-    let activeCategory = null;
+   <!-- Modal Booking Form -->
+   <div id="whatsappModal" class="modal">
+     <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Book Lab Appointment</h2>
+        <form id="bookingForm">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" required placeholder="Enter your name">
 
-    function showSubCategory(category) {
-        const section = document.getElementById("subCategorySection");
-        const container = document.getElementById("subCategoryContainer");
-        const title = document.getElementById("subCategoryTitle");
+            <label for="testName">Test Name:</label>
+            <input type="text" id="testNameInput" readonly style="background:#f0f0f0;">
 
-        if (activeCategory === category) {
-            section.style.display = "none";
-            activeCategory = null;
-            return;
-        }
+            <label for="phone">Mobile Number:</label>
+            <input type="tel" id="phone" required placeholder="Enter 10-digit mobile number">
+            <span id="phoneError" style="color: red; font-size: 13px; display: none;">
+                Please enter a valid 10-digit Indian mobile number starting with 6-9.
+            </span>
 
-        activeCategory = category;
-        container.innerHTML = "";
-        title.innerText = category + " Tests";
+            <label for="address">Address:</label>
+            <textarea id="address" required placeholder="Enter your address"></textarea>
 
-        const data = subCategoryData[category] || [];
-        if (!data.length) {
-            container.innerHTML = "<p>No tests available</p>";
-        } else {
-            data.forEach(test => {
-                const card = document.createElement("div");
-                card.className = "sub-card";
-                card.innerHTML = `
-                    <div class="sub-top">
-                        <h3>${test.icon} ${test.name}</h3>
-                        <span class="badge">Popular</span>
-                    </div>
-                    <p class="includes">🧪 ${test.includes}</p>
-                    <div class="sub-meta">
-                        <span>⏱ ${test.report}</span>
-                        <span class="price">
-                            <del>₹${parseInt(test.price.replace('₹','')) + 300}</del>
-                            <b>${test.price}</b>
-                        </span>
-                    </div>
-                    <button class="book-btn" onclick="openForm('${test.name}')">Book Now</button>
-                `;
-                container.appendChild(card);
-            });
-        }
+            <button type="submit">Send via WhatsApp</button>
+        </form>
+     </div>
+   </div>
 
-        section.style.display = "block";
-        window.scrollTo({top: section.offsetTop - 80, behavior: "smooth"});
-    }
-
-    // Open booking modal from any "Book Now" button
-    function openForm(testName) {
-        const modal = document.getElementById("whatsappModal");
-        const testInput = document.getElementById("testNameInput");
-    
-        testInput.value = testName; // set the selected test
-        modal.style.display = "block";
-    }
-    
-    // Close modal when clicking on X
-    document.querySelector("#whatsappModal .close").addEventListener("click", () => {
-        document.getElementById("whatsappModal").style.display = "none";
-    });
-    
-    // Close modal when clicking outside the modal content
-    window.addEventListener("click", (e) => {
-        const modal = document.getElementById("whatsappModal");
-        if (e.target === modal) {
-            modal.style.display = "none";
-        }
-    });
-</script>
+    <!-- JS -->
+    <script src="js/script.js" defer></script>
 
 </body>
 </html>
