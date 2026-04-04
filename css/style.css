@@ -18,6 +18,7 @@ header {
     align-items: center;
     padding: 10px 20px;
     background: white;
+
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     position: sticky;
     top: 0;
@@ -25,13 +26,13 @@ header {
     flex-wrap: nowrap; /* prevent wrapping on small screens */
 }
 
-/* Top row (logo + hamburger) */
-/*.top-bar {
+/* TOP BAR */
+.top-bar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-}*/
+    justify-content: space-between;
+    width: 100%;
+}
 
 /* Logo */
 .logo {
@@ -62,15 +63,28 @@ nav a:hover {
     color: #3498db;
 }
 
+/* ACTIVE LINK */
+nav a.active {
+    color: #3498db;
+    font-weight: 600;
+}
+
 /* Hamburger menu hidden by default */
 .hamburger {
     display: none;
     font-size: 28px;
     cursor: pointer;
+    transition: 0.3s;
+}
+
+/* ROTATE ANIMATION */
+.hamburger.active {
+    transform: rotate(90deg);
 }
 
 /* Mobile styles */
 @media (max-width: 768px) {
+
     header {
         flex-direction: column;
         align-items: stretch;
@@ -88,26 +102,23 @@ nav a:hover {
         display: block;
     }
 
+    /* SMOOTH DROPDOWN */
     nav {
-        display: none;
         flex-direction: column;
         width: 100%;
-        background: white;
-        margin-top: 10px;
-        padding: 10px 0;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
         border-top: 1px solid #eee;
     }
 
     nav.active {
-        display: flex;
+        max-height: 300px;
     }
 
     nav a {
-        padding: 10px 20px;
+        padding: 12px 20px;
         border-bottom: 1px solid #eee;
-        font-size: 16px;
     }
 
     nav a:last-child {
