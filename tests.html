@@ -143,7 +143,7 @@
             <input type="text" id="name" required placeholder="Enter your name">
 
             <label for="testName">Test Name:</label>
-            <input type="text" id="testNameInput" readonly style="background:#f0f0f0;">
+            <input type="text" id="testNameInput" required placeholder="Enter test name">
 
             <label for="phone">Mobile Number:</label>
             <input type="tel" id="phone" required placeholder="Enter 10-digit mobile number">
@@ -161,6 +161,202 @@
 
     <!-- JS -->
     <script src="js/script.js" defer></script>
+<script>
+/* ===== HAMBURGER MENU ===== */
+const hamburger = document.getElementById("hamburger");
+const navLinks = document.getElementById("nav-links");
+hamburger.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+});
+document.querySelectorAll("#nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+    });
+});
+
+/* ===== SUBCATEGORY LOGIC ===== */
+let activeCategory = null;
+const subCategoryData = {
+    "Blood & CBC": [
+        {name:"CBC Test", icon:"🧪", includes:"Hemoglobin, WBC, RBC", report:"1 Day", price:450, popular:true},
+        {name:"Iron Test", icon:"🧪", includes:"Serum Iron, TIBC", report:"1 Day", price:350, popular:false}
+    ],
+    "Liver": [
+        {name:"LFT", icon:"🧪", includes:"SGOT, SGPT", report:"1 Day", price:500, popular:true}
+    ],
+    "Kidney": [
+        {name:"KFT", icon:"🧪", includes:"Urea, Creatinine", report:"1 Day", price:400, popular:false}
+    ]
+};
+
+function showSubCategory(category) {
+    const container = document.getElementById("subCategoryContainer");
+    const section = document.getElementById("subCategorySection");
+    const title = document.getElementById("subCategoryTitle");
+
+    if (activeCategory === category) {
+        section.style.display = "none";
+        activeCategory = null;
+        return;
+    }
+
+    activeCategory = category;
+    container.innerHTML = "";
+    title.innerText = category + " Tests";
+
+    const data = subCategoryData[category];
+    if (!data || data.length === 0) {
+        container.innerHTML = "<p>No tests available</p>";
+        section.style.display = "block";
+        return;
+    }
+
+    data.forEach(test => {
+        const card = document.createElement("div");
+        card.className = "sub-card";
+        card.innerHTML = `
+            <div class="sub-top">
+                <span class="sub-icon">${test.icon}</span>
+                <h3>${test.name}</h3>
+                ${test.popular ? '<span class="badge">Popular</span>' : ''}
+            </div>
+            <p class="includes">🧪 ${test.includes}</p>
+            <div class="sub-meta">
+                <span>⏱ ${test.report}</span>
+                <span class="price">
+                    <del>₹${parseInt(test.price)+300}</del>
+                    <b>₹${test.price}</b>
+                </span>
+            </div>
+            <button class="book-btn" onclick="openWhatsAppModal('${test.name}')">Book Now</button>
+        `;
+        container.appendChild(card);
+    });
+
+    section.style.display = "block";
+    window.scrollTo({ top: section.offsetTop - 80, behavior: "smooth" });
+}
+
+/* ===== WHATSAPP MODAL + FLOATING BUTTONS ===== */
+var modal = document.getElementById("whatsappModal");
+var waBtn = document.getElementById("whatsappBtn");
+var closeBtn = document.getElementsByClassName("close")[0];
+
+var phoneInput = document.getElementById("phone");
+var phoneError = document.getElementById("phoneError");
+
+if (phoneInput && phoneError) {
+    phoneInput.addEventListener("input", function () {
+        var phonePattern = /^[6-9]\d{9}$/;
+        if (!phonePattern.test(phoneInput.value.trim())) {
+            phoneError.style.display = "inline";
+        } else {
+            phoneError.style.display = "none";
+        }
+    });
+}
+
+if (waBtn && modal) {
+    waBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        modal.style.display = "block";
+        document.getElementById("name").value = "";
+        document.getElementById("phone").value = "";
+        document.getElementById("address").value = "";
+        document.getElementById("testNameInput").value = "";
+    });
+}
+
+if (closeBtn && modal) {
+    closeBtn.addEventListener("click", function() {
+        modal.style.display = "none";
+    });
+}
+
+if (modal) {
+    window.addEventListener("click", function(e) {
+        if (e.target == modal) {
+            modal.style.display = "none";
+        }
+    });
+}
+
+/* ===== BOOKING FORM SUBMIT ===== */
+document.getElementById("bookingForm").onsubmit = function(e) {
+    e.preventDefault();
+
+    var name = document.getElementById("name").value.trim();
+    var phone = document.getElementById("phone").value.trim();
+    var address = document.getElementById("address").value.trim();
+    var testName = document.getElementById("testNameInput").value.trim();
+
+    var phonePattern = /^[6-9]\d{9}$/;
+    if (!phonePattern.test(phone)) {
+        alert("Please enter a valid 10-digit Indian mobile number starting with 6-9.");
+        return false;
+    }
+
+    if (!name || !address) {
+        alert("Please fill in all required fields.");
+        return false;
+    }
+
+    var message = `Hello! I want to book a lab test.\nTest: ${testName}\nName: ${name}\nPhone: ${phone}\nAddress: ${address}`;
+    var encodedMessage = encodeURIComponent(message);
+
+    var numbers = ["919867915433","919326220296","919372026433"];
+    var hour = new Date().getHours();
+    var agentNumber;
+    if (hour >= 8 && hour < 16) agentNumber = numbers[0];
+    else if (hour >= 16 && hour < 24) agentNumber = numbers[1];
+    else agentNumber = numbers[2];
+
+    if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        window.location.href = "https://wa.me/" + agentNumber + "?text=" + encodedMessage;
+    } else {
+        window.open("https://web.whatsapp.com/send?phone=" + agentNumber + "&text=" + encodedMessage, "_blank");
+    }
+
+    modal.style.display = "none";
+};
+
+/* ===== OPEN MODAL FOR SUBCATEGORY TESTS ===== */
+function openWhatsAppModal(testName) {
+    modal.style.display = "block";
+    document.getElementById("testNameInput").value = testName;
+    document.getElementById("name").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("address").value = "";
+}
+function callNow() {
+    // Define your numbers with their time ranges (24-hour format)
+    const numbers = [
+        { number: "9867915433", startHour: 8, endHour: 16 },  // 8 AM to 4 PM
+        { number: "9326220296", startHour: 16, endHour: 24 }, // 4 PM to 10 PM
+        { number: "9372026433", startHour: 24, endHour: 8 }   // 10 PM to 8 AM (overnight)
+    ];
+
+    const now = new Date();
+    const hour = now.getHours();
+
+    // Find the number matching current time
+    const currentNumber = numbers.find(n => {
+        if (n.startHour < n.endHour) {
+            return hour >= n.startHour && hour < n.endHour;
+        } else {
+            // Overnight case (e.g., 22 to 8)
+            return hour >= n.startHour || hour < n.endHour;
+        }
+    });
+
+    if (currentNumber) {
+        // Redirect to call the number
+        window.location.href = `tel:${currentNumber.number}`;
+    } else {
+        alert("Sorry, no contact number available at this time.");
+    }
+}
+</script>
 
 </body>
 </html>
