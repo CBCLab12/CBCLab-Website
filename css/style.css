@@ -11,67 +11,54 @@ body {
     color: #333;
 }
 
-/* ================= HEADER ================= */
+/* Header base */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
     background: white;
+
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     position: sticky;
     top: 0;
     z-index: 100;
+    flex-wrap: nowrap; /* prevent wrapping on small screens */
 }
 
-/* TOP BAR (logo + hamburger) */
+/* TOP BAR */
 .top-bar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
 }
 
-/* LOGO */
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
 .logo img {
-    height: 50px;
+    height: 70px; /* reduce height for mobile-friendly */
     width: auto;
     display: block;
 }
 
-/* HAMBURGER */
-.hamburger {
-    display: none;
-    font-size: 28px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-/* HAMBURGER ROTATE ON ACTIVE */
-.hamburger.active {
-    transform: rotate(90deg);
-}
-
-/* ================= NAVBAR ================= */
+/* Nav links */
 nav {
     display: flex;
-    align-items: center;
     gap: 20px;
 }
 
-/* NAV LINKS */
 nav a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 16px;      /* consistent spacing */
     text-decoration: none;
     color: #333;
     font-weight: 500;
     transition: 0.3s;
 }
 
-/* HOVER EFFECT */
 nav a:hover {
     color: #3498db;
 }
@@ -79,10 +66,23 @@ nav a:hover {
 /* ACTIVE LINK */
 nav a.active {
     color: #3498db;
-    font-weight: 600;
+    font-weight: 500;
 }
 
-/* ================= MOBILE ================= */
+/* Hamburger menu hidden by default */
+.hamburger {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* ROTATE ANIMATION */
+.hamburger.active {
+    transform: rotate(90deg);
+}
+
+/* Mobile styles */
 @media (max-width: 768px) {
 
     header {
@@ -90,12 +90,21 @@ nav a.active {
         align-items: stretch;
     }
 
+    /* TOP BAR */
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+    
     .hamburger {
         display: block;
     }
 
+    /* SMOOTH DROPDOWN */
     nav {
-        display: block;        /* change from flex to block */
+        flex-direction: column;
         width: 100%;
         max-height: 0;
         overflow: hidden;
@@ -104,18 +113,12 @@ nav a.active {
     }
 
     nav.active {
-        max-height: 1000px;    /* ensure all links fit */
+        max-height: 300px;
     }
 
-    /* MOBILE NAV LINKS FIXED HEIGHT */
     nav a {
-        display: block;        /* full width block */
-        min-height: 50px;      /* uniform row height */
-        line-height: 50px;     /* vertically center text */
-        padding: 0 20px;       /* horizontal padding */
-        text-align: left;
+        padding: 12px 20px;
         border-bottom: 1px solid #eee;
-        box-sizing: border-box; /* ensures padding counted in height */
     }
 
     nav a:last-child {
