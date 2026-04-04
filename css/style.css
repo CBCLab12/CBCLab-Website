@@ -110,12 +110,14 @@ nav a.active {
         max-height: 300px;   /* adjust as needed for your links */
     }
 
-    /* MOBILE NAV LINKS */
+    /* MOBILE NAV LINKS FIXED HEIGHT & FULL WIDTH */
     nav a {
-        width: 100%;
-        justify-content: flex-start;
-        padding: 12px 20px;
+        display: block;            /* fills width */
+        height: 50px;              /* SAME HEIGHT FOR ALL */
+        line-height: 50px;         /* vertically center text */
+        padding: 0 20px;           /* horizontal padding */
         border-bottom: 1px solid #eee;
+        text-align: left;
     }
 
     nav a:last-child {
