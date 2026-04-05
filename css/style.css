@@ -84,7 +84,7 @@ nav a.active {
 @media (max-width: 768px) {
     header {
         flex-direction: column;
-        align-items: stretch;
+        text-align: center;
     }
 
     .hamburger {
@@ -117,6 +117,26 @@ nav a.active {
     nav a:last-child {
         border-bottom: none;
     }
+    
+    .hero h1{
+        font-size: 30px;
+    }
+
+    .grid{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card{
+        width: 90%;
+    }
+
+    .steps{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .package-card { padding: 12px; }
 }
 
 /* HERO */
@@ -384,7 +404,8 @@ button:hover {
 
 /* CONTAINER */
 .container {
-    max-width: 1100px;
+    width: 100%;
+    max-width: 1200px;
     margin: auto;
     padding: 60px 20px;
 }
@@ -622,30 +643,4 @@ footer {
 @keyframes fadeDown {
     from {opacity: 0; transform: translateY(-30px);}
     to {opacity: 1; transform: translateY(0);}
-}
-
-/* MOBILE RESPONSIVE */
-@media(max-width: 768px){
-    header{
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .hero h1{
-        font-size: 30px;
-    }
-
-    .grid{
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .card{
-        width: 90%;
-    }
-
-    .steps{
-        flex-direction: column;
-        align-items: center;
-    }
 }
