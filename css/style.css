@@ -202,7 +202,7 @@ nav a.active {
 .category-card.active i { transform: rotate(180deg); }*/
 
 .category-section {
-    margin-top: 20px 10px 0 10px;   /* 👈 adds gap from hero */
+    margin: 20px 10px 0 10px;   /* 👈 adds gap from hero */
     padding: 25px;
     background: #f6f7fb;
 }
